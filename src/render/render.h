@@ -5,7 +5,8 @@
 #ifndef PCL_TEST_RENDER_H
 #define PCL_TEST_RENDER_H
 
-#include <pcl/visualization/pcl_visulizer.h>
+//#include <pcl/console/print.h>
+#include <pcl/visualization/pcl_visualizer>
 #include "box.h"
 #include <iostream>
 #include <vector>
@@ -41,10 +42,51 @@ struct Car {
                         position.y - dimensions.y/2, position.y + dimensions.y/2,
                         position.z, position.z + dimensions.z*2/3, color.r,
                         color.g, color.b, name);
-        viewer->setShapeRenderingProperties(pcl::visualization::PCL_VISUALIZER,
-                                            )
+        viewer->setShapeRenderingProperties(pcl::visualization::PCL_VISUALIZER_REPRESENTATION,
+                                            pcl::visualization::PCL_VISUALIZER_REPRESENTATUIN_SURFACE,
+                                            name);
+        viewer->setShapeRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR,
+                                            color.r, color.g, color.b, name);
+        viewer->setShapeRenderingProperties(pcl::visualization::PCL_OPACITY, 1.0,
+                                            name);
+        viewer->addCube(position.x - dimensions.x/4, position.x + dimensions.x/4,
+                        position.y - dimensions.y/2, position.y + dimensions.y/2,
+                        position.z, position.z+dimensions.z*2/3,
+                        color.r, color.g, color.b, name+"Top");
+        viewer->setShapeRenderingProperties(pcl::visualization::PCL_VISUALIZER_REPRESENTATION,
+                                            pcl::visualization::PCL_VISUALIZER_REPRESENTATION_SURFACE,
+                                            name+"Top");
+        viewer->setShapeRenderingProperties(pcl::visualization::PCL_VISUALIZER_COLOR,
+                                            color.r, color.g, color.b, name+"Top");
+        viewer->setShapeRenderingProperties(pcl::visualization::OPACITY, 1.0,
+                                            name+"Top");
+    }
+    static bool inbetween(double point, double center, double range) {
+        return (center - range <= point) && (center + range >= point);
+    }
+    bool checkCollision(Vect3 point) {
+        return (inbetween(point.x, position.x, dimensions.x/2) &&
+                inbetween(point.y, position.y, dimensions.y/2) &&
+                inbetween(point.z, position.z+dimensions.z/3, dimensions.z/3)) ||
+                (inbetween(point.x, position.x, dimensions.x/4) &&
+                 inbetween(point.y, position.y, dimensions.y/2) &&
+                 inbetween(point.z, position.z+dimensions.z*5/6, dimensions.z/6));
     }
 };
 
+void renderHighway(pcl::visualization::PCLVisualizer::Ptr& viewer);
+void renderRays(pcl::visualization::PCLVisualizer::Ptr& viewer, const Vect3& origin,
+                const pcl::PointCloud<pcl::PointXYZ>::Ptr& cloud);
+void clearRays(pcl::visualizaton::PCLVisualizer::Ptr& viewer);
+void renderPointCloud(pcl::visualization::PCLVisualizer::Ptr& viewer,
+                      const pcl::PointCloud<pcl::PointXYZ>Ptr& cloud,
+                      str::string name, Color color=Color(1,1,1));
+void renderPointCloud(pcl::visualization::PCLVisualizer::Ptr& viewer,
+                      const pcl::PointCloud<pcl::PointXYZI>Ptr& cloud,
+                      str::string name, Color color=Color(-1,-1,-1));
+void renderBox(pcl::visualization::PCLVisualizer::Ptr& viewer, Box, box, int id,
+               Color color=Color(1,0,0), float opacity=1);
+void renderBox(pcl::visualization::PCLVisualizer::Ptr& viewer, BoxQ, box, int id,
+               Color color=Color(1,0,0), float opacity=1);
 
 #endif //PCL_TEST_RENDER_H
