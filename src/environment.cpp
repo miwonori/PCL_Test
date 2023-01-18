@@ -5,7 +5,6 @@
 #include "sensors/lidar.h"
 #include "render/render.h"
 #include "processPointClouds.h"
-
 // using templates for processPointClouds so also include .cpp to help linker
 #include "processPointClouds.cpp"
 
@@ -59,7 +58,7 @@ void initCamera(CameraAngle setAngle,
             viewer->setCameraPosition(0, -distance, 0, 0, 0, 1);
             break;
         case FPS :
-            viewer->serCameraPosition(-10, 0, 0, 0, 0, 1);
+            viewer->setCameraPosition(-10, 0, 0, 0, 0, 1);
         default :
             break;
     }
@@ -76,7 +75,7 @@ int main(int argc, char** argv) {
     viewer(new pcl::visualization::PCLVisualizer ("3D Viewer"));
 
     CameraAngle setAngle = XY;
-    intiCamera(setAngle, viewer);
+    initCamera(setAngle, viewer);
     simpleHighway(viewer);
 
     while(!viewer->wasStopped()) {
