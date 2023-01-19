@@ -40,8 +40,8 @@ void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer) {
   Lidar* plidar = new Lidar(cars, 0.0);
   // TODO create point process
   pcl::PointCloud<pcl::PointXYZ>::Ptr lidar_scaned = plidar->scan();
-  renderRays(viewer, plidar->position,lidar_scaned);
-//  renderPointCloud(viewer, )
+//  renderRays(viewer, plidar->position,lidar_scaned);
+  renderPointCloud(viewer, lidar_scaned, "Scaned Point");
 
 
   delete plidar;

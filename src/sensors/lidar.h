@@ -82,21 +82,21 @@ struct Lidar {
         cloud(new pcl::PointCloud<pcl::PointXYZ>()), position(0,0,2.6) {
 
         // TODO : set minDistance to 5 to remove Points from roof of ego car
-        minDistance = 0;
+        minDistance = 1;
         maxDistance = 50;
         resolution = 0.2;
         // TODO : set sderr to 0.2 to get mor interesting pcd files
-        sderr = 0.0;
+        sderr = 0.05;
         cars = setCars;
         groundSlope = setGroundSlope;
 
         // TODO : increase number of layers to 8 to get higher resolution pcd
-        int numLayers = 3;
+        int numLayers = 16;
         // the steepest vertical angle
         double steepestAngle = 30.0*(-1*D2R);
         double angleRange = 26.0*D2R;
         // TODO : set to pi/64 to get higher resolution pcd
-        double horizontalAngleInc = pi/6;
+        double horizontalAngleInc = pi/64;
         double angleIncrement = angleRange/numLayers;
         for(double angleVertical = steepestAngle;
                    angleVertical < steepestAngle + angleRange;
