@@ -93,7 +93,7 @@ struct Lidar {
         // TODO : increase number of layers to 8 to get higher resolution pcd
         int numLayers = 3;
         // the steepest vertical angle
-        double steepestAngle = 30.0*D2R;
+        double steepestAngle = 30.0*(-1*D2R);
         double angleRange = 26.0*D2R;
         // TODO : set to pi/64 to get higher resolution pcd
         double horizontalAngleInc = pi/6;

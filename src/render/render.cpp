@@ -20,9 +20,9 @@ void renderHighway(pcl::visualization::PCLVisualizer::Ptr& viewer) {
     viewer->setShapeRenderingProperties(pcl::visualization::PCL_VISUALIZER_OPACITY,
                                         1.0, "highwayPavement");
     viewer->addLine(pcl::PointXYZ(-roadLength/2,-roadWidth/6, 0.01),
-                    pcl::PointXYZ(roadLength/2, -roadWidth/6, 0.01), "line1");
+                    pcl::PointXYZ(roadLength/2, -roadWidth/6, 0.01),1,1,0, "line1");
     viewer->addLine(pcl::PointXYZ(-roadLength/2, roadWidth/6, 0.01),
-                    pcl::PointXYZ(roadLength/2,  roadWidth/6, 0.01), "line2");
+                    pcl::PointXYZ(roadLength/2,  roadWidth/6, 0.01),1,1,0, "line2");
 }
 
 int countRays = 0;
@@ -56,7 +56,7 @@ void renderPointCloud(pcl::visualization::PCLVisualizer::Ptr& viewer,
 void renderPointCloud(pcl::visualization::PCLVisualizer::Ptr& viewer,
                       const pcl::PointCloud<pcl::PointXYZI>::Ptr& cloud,
                       std::string name, Color color){
-    if(color.r == 1) {
+    if(color.r == -1) {
         pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI>
                 intensity_distribution(cloud,"intensity");
         viewer->addPointCloud<pcl::PointXYZI>(cloud, intensity_distribution, name);
