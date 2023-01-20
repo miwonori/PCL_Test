@@ -102,7 +102,7 @@ void renderBox(pcl::visualization::PCLVisualizer::Ptr& viewer, BoxQ box, int id,
                Color color, float opacity){
     if(opacity > 1.0)
         opacity = 1.0;
-    if(opacity <0.0)
+    if(opacity < 0.0)
         opacity = 0.0;
 
     std::string cube = "box"+std::to_string(id);

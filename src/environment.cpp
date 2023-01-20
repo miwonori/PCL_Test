@@ -28,12 +28,11 @@ std::vector<Car> initHighway(bool renderScene,
         car2.render(viewer);
         car3.render(viewer);
     }
-
     return cars;
 }
 
 void simpleHighway(pcl::visualization::PCLVisualizer::Ptr& viewer) {
-  bool renderScene = true;
+  bool renderScene = false;
   std::vector<Car> cars = initHighway(renderScene, viewer);
 
   // TODO Create LIDAR sensor
